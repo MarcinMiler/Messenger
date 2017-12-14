@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./build/index.js",
+    "build-server": "babel -d ./build ./server -s"
+  },
+  "author": "Marcin Miler",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "graphql": "^0.11.7",
+    "graphql-server-express": "^1.1.6",
+    "graphql-subscriptions": "^0.5.4",
+    "graphql-tools": "^2.5.0",
+    "http": "0.0.0",
+    "jsonwebtoken": "^8.1.0",
+    "merge-graphql-schemas": "^1.1.4",
+    "mongoose": "^4.12.2",
+    "subscriptions-transport-ws": "^0.9.1",
+    "uuid": "^3.1.0"
+  }
+}
