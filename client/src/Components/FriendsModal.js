@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
-import { graphql, compose, withApollo } from 'react-apollo'
-import gql from 'graphql-tag'
-import styled, { keyframes } from 'styled-components'
-import { Button, Header, Icon, Image, Modal, Item } from 'semantic-ui-react'
+import React from 'react'
+import styled from 'styled-components'
+import { Button, Header, Modal, Item } from 'semantic-ui-react'
 import Plus from 'react-icons/lib/md/add-circle-outline'
 
 const FriendsModal = ({

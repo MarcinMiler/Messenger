@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Scrollbars } from 'react-custom-scrollbars'
 
@@ -82,12 +82,12 @@ const Channel = styled.div`
 const WrapMessage = styled.div`
     margin: 15px 0 15px 0;
 `
-const Time = styled.p`
-    text-align: center;
-    color: white;
-    font-size: 13px;
-    margin: 15px 0 15px 0;
-`
+// const Time = styled.p`
+//     text-align: center;
+//     color: white;
+//     font-size: 13px;
+//     margin: 15px 0 15px 0;
+// `
 const WrapMessageImg = styled.div`
     display: flex;
 `

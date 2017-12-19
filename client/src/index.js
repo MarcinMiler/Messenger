@@ -13,7 +13,7 @@ import { getMainDefinition } from 'apollo-utilities'
 import { setContext } from 'apollo-link-context'
 
 import AppContainer from './Containers/AppContainer'
-import Login from './Components/Login'
+import LoginContainer from './Containers/LoginContainer'
 import AddFriend from './Components/AddFriend'
 
 import { createStore, applyMiddleware } from 'redux'
@@ -25,7 +25,7 @@ const store = createStore(
     rootReducer, applyMiddleware(thunk)
 )
 
-const httpLink = new HttpLink({ uri: 'https://marcinmiler.herokuapp.com/graphql' })
+const httpLink = new HttpLink({ uri: 'http://localhost:4000/graphql' })
 
 const middlewareLink = setContext(() => ({
     headers: {
@@ -34,7 +34,7 @@ const middlewareLink = setContext(() => ({
 }))
 
 const wsLink = new WebSocketLink({
-  uri: `wss://marcinmiler.herokuapp.com/subscriptions`,
+  uri: `ws://localhost:4000/subscriptions`,
   options: {
     reconnect: true
   }
@@ -61,7 +61,7 @@ ReactDOM.render(
         <Provider store={store}>
             <Router>
                 <div>
-                    <Route exact path="/" component={Login}/>
+                    <Route exact path="/" component={LoginContainer}/>
                     <Route exact path="/app" component={AppContainer}/>
                     <Route exact path="/addFriend" component={AddFriend}/>
                 </div>

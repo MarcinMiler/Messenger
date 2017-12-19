@@ -13,7 +13,7 @@ export const register = async (args, models) => {
     if(await models.UserModel.findOne({ email })){
         return {
             ok: false,
-            errors: [{ message: 'Email is taken' }]
+            error: { message: 'Email is taken' }
         }
     }
 
@@ -46,7 +46,7 @@ export const tryLogin = async (email, password, models, SECRET) => {
     if(!user) {
         return {
             ok: false,
-            errors: [{ message: 'Wrong email' }]
+            error: { message: 'Wrong email' }
         }
     }
 
@@ -54,7 +54,7 @@ export const tryLogin = async (email, password, models, SECRET) => {
     if(!valid) {
         return {
             ok: false,
-            errors: [{ message: 'Wrong password' }]
+            error: { message: 'Wrong password' }
         }
     }
 

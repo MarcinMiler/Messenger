@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { connect } from 'react-redux'
-import moment from 'moment'
+// import moment from 'moment'
 import SendIcon from 'react-icons/lib/md/send'
 
 class BottomNav extends Component {

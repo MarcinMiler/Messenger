@@ -1,111 +1,97 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
-import IconRight from 'react-icons/lib/md/arrow-forward'
+// import IconRight from 'react-icons/lib/md/arrow-forward'
+import { Message } from 'semantic-ui-react'
 
-class Login extends Component {
-
-    state = {
-        loginActive: true,
-        registerActive: false,
-        loginEmail: '',
-        loginPassword: '',
-        registerFirstName: '',
-        registerLastName: '',
-        registerEmail: '',
-        registerPassword: '',
-    }
-
-    render() {
-        console.log(this.props)
-
-        const login = async () => {
-            const loginResponse = await this.props.login({
-                variables: {
-                    email: this.state.loginEmail,
-                    password: this.state.loginPassword
-                },
-            })
-            console.log(loginResponse, 'login')
-            const { ok, token, errors } = loginResponse.data.login
-            if(ok) {
-                localStorage.setItem('token', token)
-                this.props.history.push('/app')
-            }
-        }
-
-        const register = async () => {
-            const registerResponse = await this.props.register({
-                variables: {
-                    firstName: this.state.registerFirstName,
-                    lastName: this.state.registerLastName,
-                    photo: this.state.registerPhoto,
-                    email: this.state.registerEmail,
-                    password: this.state.registerPassword
-                },
-            })
-            console.log(registerResponse, 'reg')
-        }
-
-        return(
-            <div>
+const Login = ({
+    login,
+    register,
+    handleChangeState,
+    state
+}) => { 
+    return(
+        <div>
             <WrapOne>
                 <TextWrap>
-                    <FormSwitch active={this.state.loginActive} onClick={() => this.setState({loginActive: true, registerActive: false})}>Login</FormSwitch>
+                    <FormSwitch active={state.loginActive} onClick={() => handleChangeState('loginActive', true) }>Login</FormSwitch>
                 </TextWrap>
 
                 <TextWrap>
-                    <FormSwitch active={this.state.registerActive} onClick={() => this.setState({loginActive: false, registerActive: true})}>Register</FormSwitch>
+                    <FormSwitch active={state.registerActive} onClick={() => handleChangeState('loginActive', false) }>Register</FormSwitch>
                 </TextWrap>
                 
-                
                 {
-                    this.state.loginActive 
-                    
+                    state.loginActive
+
                     ?   <div>
+
                             <WrapInput>
+                                {
+                                    state.messageLoginError.error
+                                        ? <Message 
+                                            error
+                                            header='Something goes wrong'
+                                            list={[...state.messageLoginError.messages]}/>
+
+                                        : <div></div>
+                                }
+
                                 <Group>
-                                <Input type="text" required key={1} onChange={(e) => this.setState({loginEmail: e.target.value})}/>
-                                <Label>Email</Label>
+                                    <Input type="text" required key={1} onChange={e => handleChangeState('loginEmail', e.target.value) }/>
+                                    <Label>Email</Label>
                                 </Group>
+
                                 <Group>
-                                <Input type="password" required key={2} onChange={(e) => this.setState({loginPassword: e.target.value})}/>
-                                <Label>Password</Label>
+                                    <Input type="password" required key={2} onChange={e => handleChangeState('loginPassword', e.target.value)}/>
+                                    <Label>Password</Label>
                                 </Group>
+
                                 <Button onClick={ login }>Login</Button>
                             </WrapInput>
                             
                         </div>
                     
                     :   <div>
+
                             <WrapInput2>
+                                {
+                                    state.messageRegisterError.error
+                                        ? <Message 
+                                            error
+                                            header='Something goes wrong'
+                                            list={[...state.messageRegisterError.messages]}/>
 
-                            <Group>
-                            <Input type="text" required key={3} onChange={(e) => this.setState({registerFirstName: e.target.value})} />
-                            <Label>First Name</Label>
-                            </Group>
+                                        : <div></div>
+                                }
+                                <Group>
+                                    <Input type="text" required key={3} onChange={e => handleChangeState('registerFirstName', e.target.value)} />
+                                    <Label>First Name</Label>
+                                </Group>
 
-                            <Group>
-                            <Input type="text" required key={4} onChange={(e) => this.setState({registerLastName: e.target.value})} />
-                            <Label>Last Name</Label>
-                            </Group>
+                                <Group>
+                                    <Input type="text" required key={4} onChange={e => handleChangeState('registerLastName', e.target.value)} />
+                                    <Label>Last Name</Label>
+                                </Group>
 
-                            <Group>
-                            <Input type="text" required key={5} onChange={(e) => this.setState({registerEmail: e.target.value})} />
-                            <Label>Email</Label>
-                            </Group>
+                                <Group>
+                                    <Input type="text" required key={5} onChange={e => handleChangeState('registerEmail', e.target.value)} />
+                                    <Label>Email</Label>
+                                </Group>
 
-                            <Group>
-                            <Input type="password" required key={6} onChange={(e) => this.setState({registerPassword: e.target.value})}/>
-                            <Label>Password</Label>
-                            </Group>
+                                <Group>
+                                    <Input type="password" required key={6} onChange={e => handleChangeState('registerPassword', e.target.value)}/>
+                                    <Label>Password</Label>
+                                </Group>
 
-                            <Button onClick={ register }>Register</Button>
+                                <Group>
+                                    <Input type="password" required key={7} onChange={e => handleChangeState('registerPassword2', e.target.value)}/>
+                                    <Label>Password</Label>
+                                </Group>
+
+                                <Button onClick={ register }>Register</Button>
                             </WrapInput2>
                         </div>
                 }
-                
                 
             </WrapOne>
 
@@ -113,36 +99,9 @@ class Login extends Component {
                 <Title>Messenger</Title>
             </WrapTwo>
         </div>
-        )
-    }
-}
+)}
 
-const loginMutation = gql`
-    mutation login($email: String!, $password: String!) {
-        login(email: $email, password: $password) {
-            ok,
-            token,
-            errors {
-                message
-            }
-        }
-    }
-`
-const registerMutation = gql`
-    mutation register($firstName: String! $lastName: String! $email: String!, $password: String!) {
-        register(firstName: $firstName lastName: $lastName email: $email, password: $password) {
-            ok,
-            errors {
-                message
-            }
-        }
-    }
-`
-
-export default compose(
-    graphql(loginMutation, { name: 'login' }),
-    graphql(registerMutation, { name: 'register' }),
-)(Login)
+export default Login
 
 const fade = keyframes`
     from {

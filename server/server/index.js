@@ -36,7 +36,7 @@ db.once('open',() => {
   console.log('open db')
 })
 
-server.use('*', cors({ origin: 'https://marcinmiler.github.io' }))
+server.use(cors('*'))
 
 server.get('/', (req, res) => {
   res.send("LOL")

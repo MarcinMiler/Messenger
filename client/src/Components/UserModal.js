@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
-import { graphql, compose, withApollo } from 'react-apollo'
-import gql from 'graphql-tag'
+import React from 'react'
 import styled from 'styled-components'
-import { Button, Header, Input, Modal, Form, Icon, Image, Tab } from 'semantic-ui-react'
+import { Button, Header, Input, Modal, Icon, Image } from 'semantic-ui-react'
 
 const UserModal = ({
     onClose,

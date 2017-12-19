@@ -143,9 +143,6 @@ const SearchInput = styled.input`
         color: #bcbcbc;
     }
 `
-const ImgWrap = styled.div`
-    display: flex;
-`
 const FriendsImg = styled.div`
     width: 50px;
     height: 50px;

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./build/index.js",
+    "start": "nodemon ./server/index.js --exec babel-node",
+    "start-server": "node ./build/index.js",
     "build-server": "babel -d ./build ./server -s"
   },
   "author": "Marcin Miler",

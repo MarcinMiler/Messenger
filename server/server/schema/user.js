@@ -16,12 +16,12 @@ export default `
     type LoginResponse {
         ok: Boolean!
         token: String
-        errors: [Error]
+        error: Error
     }
 
     type Response {
         ok: Boolean!
-        errors: [Error]
+        error: Error
     }
 
     type Mutation {
