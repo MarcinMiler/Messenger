@@ -1,6 +1,6 @@
 
 const initialState = {
-    channelID: 'd7b3f113-5ad2-46b1-859b-5c086c8f0d18',
+    channelID: '6abd4376-f299-4960-8726-6572431a7759',
     firstName: '',
     lastName: '',
     online: false,

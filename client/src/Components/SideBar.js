@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import IconSearch from 'react-icons/lib/md/search'
 import { connect } from 'react-redux'
 import { selectFriend } from '../Actions'
+import { Scrollbars } from 'react-custom-scrollbars'
 import IconSettings from 'react-icons/lib/md/settings'
 import Plus from 'react-icons/lib/md/add-circle'
 
@@ -51,11 +52,11 @@ class SideBar extends Component {
                         <FriendsText>Friends</FriendsText>
                         <StyledIconPlus onClick={this.props.openFriendsModal} />
                     </Wrap>
-
+                    <Scrollbars style={{width: '275px', height: '770px'}} >
                     {
                         ListOfFriends
                     }
-
+                    </Scrollbars>
                 </FriendsList>
             </MenuWrap>
         </Menu>

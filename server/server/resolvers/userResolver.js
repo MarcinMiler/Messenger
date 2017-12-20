@@ -3,7 +3,10 @@ import bcrypt from 'bcrypt'
 
 export default {
     Query: {
-        users: async (parent, args, { models }) => await models.UserModel.find({}, 'id firstName lastName photo friends email'),
+        users: async (parent, args, { models, user }) => {
+            const users = await models.UserModel.find({}, 'id firstName lastName photo friends email')
+            return users.filter(f => f.id !== user.id)
+        },
         me: async (parent, args, { models, user }) => {
             const u = await models.UserModel.findOne({ id: user.id }, 'id firstName lastName photo friends email')
             return u
